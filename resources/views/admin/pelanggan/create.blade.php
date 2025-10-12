@@ -387,6 +387,12 @@
             </div>
         </div>
 
+        @if (session('success'))
+            <div class="alert alert-success">
+                {!! session('success') !!}
+            </div>
+        @endif
+
         <div class="row">
             <div class="col-12 mb-4">
                 <div class="card border-0 shadow components-section">
@@ -432,13 +438,13 @@
                                 <!-- Email -->
                                 <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" id="email" name="email" class="form-control" value="{{ old('email') }}" required>
+                                <input type="text" id="email" name="email" class="form-control" value="{{ old('email') }}" required>
                                 </div>
 
                                 <!-- Phone -->
                                 <div class="mb-3">
                                 <label for="phone" class="form-label">Phone</label>
-                                <input type="tel" id="phone" name="phone" class="form-control" value="{{ old('phone') }}">
+                                <input type="text" id="phone" name="phone" class="form-control" value="{{ old('phone') }}">
                                 </div>
 
                                 <!-- Buttons -->

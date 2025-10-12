@@ -86,7 +86,7 @@
             <div class="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
                 <div class="d-flex align-items-center">
                     <div class="avatar-lg me-4">
-                        <img src="{{ asset('assets-admin/img/team/profile-picture-3.jpg')}}" class="card-img-top rounded-circle border-white" alt="Bonnie Green">
+                        <img src="{{ asset('assets-admin/img/team/profile-picture-3.jpg') }}" class="card-img-top rounded-circle border-white" alt="Bonnie Green">
                     </div>
                     <div class="d-block">
                         <h2 class="h5 mb-3">Hi, Jane</h2>
@@ -111,7 +111,7 @@
                 <li class="nav-item">
                     <a href="../../index.html" class="nav-link d-flex align-items-center">
                         <span class="sidebar-icon">
-                            <img src="{{ asset('assets-admin/img/brand/light.svg')}}" height="20" width="20" alt="Volt Logo">
+                            <img src="{{ asset('assets-admin/img/brand/light.svg') }}" height="20" width="20" alt="Volt Logo">
                         </span>
                         <span class="mt-1 ms-1 sidebar-text">Volt Overview</span>
                     </a>
@@ -373,7 +373,6 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item"><a href="#">Pelanggan</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Tambah Pelanggan</li>
                 </ol>
             </nav>
             <div class="d-flex justify-content-between w-100 flex-wrap">
@@ -382,75 +381,67 @@
                     <p class="mb-0">List data seluruh pelanggan</p>
                 </div>
                 <div>
-                    <a href="{{route('pelanggan.index')}}" class="btn btn-primary"><i class="far fa-question-circle me-1"></i> Kembali</a>
+                    <a href="{{ route('pelanggan.create') }}" class="btn btn-success text-white"><i class="far fa-question-circle me-1"></i> Tambah Pelanggan</a>
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-12 mb-4">
-                <div class="card border-0 shadow components-section">
-                    <div class="card-body">
-                        <form action="{{ route('pelanggan.store') }}" method="POST">
-                            @csrf
+            <div class="col-12">
+            </div>
+        </div>
 
-                            <div class="row mb-4">
-                            <div class="col-lg-4 col-sm-6">
-                                <!-- First Name -->
-                                <div class="mb-3">
-                                <label for="first_name" class="form-label">First name</label>
-                                <input type="text" id="first_name" name="first_name" class="form-control" value="{{ old('first_name') }}" required>
-                                </div>
+        <div class="card border-0 shadow mb-4">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="table-pelanggan" class="table table-centered table-nowrap mb-0 rounded">
+                        <thead class="thead-light">
+                            <tr>
+                                <th class="border-0">First Name</th>
+                                <th class="border-0">Last Name</th>
+                                <th class="border-0">Birthday</th>
+                                <th class="border-0">Gender</th>
+                                <th class="border-0">Email</th>
+                                <th class="border-0">Phone</th>
+                                <th class="border-0 rounded-end">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tbody>
+                                @foreach ($dataPelanggan as $item)
+                                    <tr>
+                                        <td>{{ $item->first_name }}</td>
+                                        <td>{{ $item->last_name }}</td>
+                                        <td>{{ $item->birthday }}</td>
+                                        <td>{{ $item->gender }}</td>
+                                        <td>{{ $item->email }}</td>
+                                        <td>{{ $item->phone }}</td>
+                                        <td>
+                                            <a href="{{ route('pelanggan.edit',$item->pelanggan_id) }}" class="btn btn-info btn-sm">
+                                                <svg  class="icon icon-xs me-2" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"></path>
+                                                </svg>
+                                                Edit
+                                            </a>
 
-                                <!-- Last Name -->
-                                <div class="mb-3">
-                                <label for="last_name" class="form-label">Last name</label>
-                                <input type="text" id="last_name" name="last_name" class="form-control" value="{{ old('last_name') }}" required>
-                                </div>
-                            </div>
+                                            <form action="{{ route('pelanggan.destroy', $item->pelanggan_id) }}" method="POST" style="display:inline">
+                                                @csrf
+                                                @method("DELETE")
+                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                    <svg class="icon icon-xs me-2" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"></path>
+                                                        </svg>
+                                                    Hapus
+                                                </button>
+                                            </form>
 
-                            <div class="col-lg-4 col-sm-6">
-                                <!-- Birthday -->
-                                <div class="mb-3">
-                                <label for="birthday" class="form-label">Birthday</label>
-                                <input type="date" id="birthday" name="birthday" class="form-control" value="{{ old('birthday') }}">
-                                </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
 
-                                <!-- Gender -->
-                                <div class="mb-3">
-                                <label for="gender" class="form-label">Gender</label>
-                                <select id="gender" name="gender" class="form-select">
-                                    <option value="">-- Pilih --</option>
-                                    <option value="Male" {{ old('gender') == 'Male' ? 'selected' : '' }}>Male</option>
-                                    <option value="Female" {{ old('gender') == 'Female' ? 'selected' : '' }}>Female</option>
-                                    <option value="Other" {{ old('gender') == 'Other' ? 'selected' : '' }}>Other</option>
-                                </select>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-sm-12">
-                                <!-- Email -->
-                                <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" id="email" name="email" class="form-control" value="{{ old('email') }}" required>
-                                </div>
-
-                                <!-- Phone -->
-                                <div class="mb-3">
-                                <label for="phone" class="form-label">Phone</label>
-                                <input type="tel" id="phone" name="phone" class="form-control" value="{{ old('phone') }}">
-                                </div>
-
-                                <!-- Buttons -->
-                                <div class="mt-3">
-                                <button type="submit" class="btn btn-primary">Simpan</button>
-                                <a href="{{ route('pelanggan.index') }}" class="btn btn-outline-secondary ms-2">Batal</a>
-                                </div>
-                            </div>
-                            </div>
-                        </form>
-                        </div>
-
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -526,3 +517,11 @@
 </body>
 
 </html>
+{{-- <a href="{{ route('pelanggan.edit', $item->pelanggan_id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                            <form action="{{ route('pelanggan.destroy', $item->pelanggan_id) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus data ini?')">
+                                                    Hapus
+                                                </button>
+                                            </form> --}}
