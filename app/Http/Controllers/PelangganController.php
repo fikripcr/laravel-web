@@ -55,7 +55,8 @@ class PelangganController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data['dataPelanggan'] = Pelanggan::findOrFail($id);
+        return view('admin.pelanggan.edit', $data);
     }
 
     /**
@@ -65,6 +66,8 @@ class PelangganController extends Controller
     {
         $pelanggan_id = $id;
         $pelanggan = Pelanggan::findOrFail($pelanggan_id);
+
+        dd($pelanggan);
 
         $pelanggan->first_name = $request->first_name;
         $pelanggan->last_name = $request->last_name;
