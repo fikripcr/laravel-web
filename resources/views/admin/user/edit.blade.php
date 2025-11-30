@@ -36,11 +36,11 @@
                             <div class="col-lg-4 col-sm-6">
                                 <div class="mb-3">
                                     <label for="first_name" class="form-label">Name</label>
-                                    <input type="text" name="first_name" class="form-control" value="{{$dataUser->name}}" required>
+                                    <input type="text" name="name" class="form-control" value="{{$dataUser->name}}" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="last_name" class="form-label">Email</label>
-                                    <input type="text" name="last_name" class="form-control" value="{{$dataUser->email}}" required>
+                                    <input type="text" name="email" class="form-control" value="{{$dataUser->email}}" required>
                                 </div>
                             </div>
 

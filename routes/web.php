@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\QuestionController;
@@ -13,6 +14,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/auth', [AuthController::class, 'index'])->name('auth.index');
+Route::get('/auth/login', [AuthController::class, 'login'])->name('auth.login');
+Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 Route::get('/pcr', function () {
     return 'Selamat Datang di Website Kampus PCR!';
