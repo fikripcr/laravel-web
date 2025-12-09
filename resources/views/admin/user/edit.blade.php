@@ -42,6 +42,14 @@
                                     <label for="last_name" class="form-label">Email</label>
                                     <input type="text" name="email" class="form-control" value="{{$dataUser->email}}" required>
                                 </div>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Role</label>
+                                    <select name="role" class="form-select" required>
+                                        <option value="Super Admin">Super Admin</option>
+                                        <option value="Pelanggan">Pelanggan</option>
+                                        <option value="Mitra">Mitra</option>
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="col-lg-4 col-sm-12">

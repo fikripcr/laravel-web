@@ -10,6 +10,9 @@ class AuthController extends Controller
 {
     public function index()
     {
+        if (Auth::check()) {
+            return redirect()->route('dashboard');
+        }
         return view('auth.login');
     }
 
@@ -22,6 +25,8 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
         if ($user && Hash::check($request->password, $user->password)) {
+            Auth::login($user);
+            session(['last_login'=>now()]);
 
             return redirect()->route('dashboard')->with('success', 'Login berhasil!');
         } else {

@@ -42,7 +42,17 @@
                                     <label for="email" class="form-label">Email</label>
                                     <input type="text" name="email" class="form-control" required>
                                 </div>
+
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Role</label>
+                                    <select name="role" class="form-select" required>
+                                        <option value="Super Admin">Super Admin</option>
+                                        <option value="Pelanggan">Pelanggan</option>
+                                        <option value="Mitra">Mitra</option>
+                                    </select>
+                                </div>
                             </div>
+
 
                             <div class="col-lg-4 col-sm-12">
                                 <div class="mb-3">

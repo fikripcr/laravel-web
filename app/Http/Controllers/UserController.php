@@ -33,6 +33,7 @@ class UserController extends Controller
 
         $data['name'] = $request->name;
         $data['email'] = $request->email;
+        $data['role'] = $request->role;
         $data['password'] = Hash::make($request->password);
         User::create($data);
 
@@ -67,6 +68,7 @@ class UserController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->role = $request->role;
         $user->password = Hash::make($request->password);
 
         $user->save();
