@@ -49,8 +49,20 @@ Route::post('question/store', [QuestionController::class, 'store'])
 
 Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
 
-Route::resource('pelanggan', PelangganController::class);
-Route::resource('user', UserController::class);
+
+Route::group(['middleware' => ['checkislogin']], function () {
+
+    Route::group(['middleware' => ['checkrole:Super Admin']], function () {
+        Route::resource('user', UserController::class);
+        Route::resource('pelanggan', PelangganController::class);
+    });
+
+    Route::group(['middleware' => ['checkrole:mitra']], function () {
+        Route::resource('pelanggan', PelangganController::class)->only(['edit','update']);
+        Route::resource('user', UserController::class)->only(['edit','update']);;
+    });
+
+});
 
 
 Route::get('auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
